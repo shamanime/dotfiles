@@ -1,0 +1,36 @@
+# ZSH
+DISABLE_AUTO_UPDATE="true"
+
+# SHELL
+PROFILE="$HOME/.zshrc"
+
+# LOCALE
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# GLOBAL
+export EDITOR="nvim"
+export GIT_EDITOR="nvim"
+
+# TMUX
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#tmux
+# export ZSH_TMUX_AUTOSTART="true"
+# export ZSH_TMUX_AUTOSTART_ONCE="true"
+
+# oh-my-zsh
+export DISABLE_UPDATE_PROMPT=true
+
+export HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt appendhistory
+
+export LESS_TERMCAP_md="${yellow}";
+
+export MANPAGER='less -X';
+
+export GPG_TTY=$(tty);
+
+export FZF_DEFAULT_COMMAND='rg --files'
+
+export BAT_THEME="OneHalfDark"

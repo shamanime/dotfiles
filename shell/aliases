@@ -1,0 +1,38 @@
+alias vi=nvim
+alias vim=nvim
+alias rm='rm -i'
+
+alias df='df -h'
+alias du='du -h'
+
+alias -g G='| grep -i --color'
+alias -g L='| less'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+alias ls='ls -lh'
+alias ll='ls -lah'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias e="nvim"
+alias g='git'
+alias r='rails'
+alias rk='rake'
+alias b='bundle exec'
+
+eval "$(hub alias -s)"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+
+alias dns_reset="dscacheutil -flushcache && killall -HUP mDNSResponder"
+
+fi
+
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+
+alias apt='aptitude'
+
+fi

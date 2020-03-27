@@ -1,0 +1,17 @@
+# Dir complete
+function p() { cd ~/Projects/$@; };
+compctl -/ -W ~/Projects p
+
+function dl() { cd ~/Downloads/$@; };
+compctl -/ -W ~/Downloads dl
+
+function dt() { cd ~/Desktop/$@; };
+compctl -/ -W ~/Desktop dt
+
+function h() { cd ~/$@; };
+compctl -/ -W ~/ h
+
+# ZSH & Bash Completion
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
+zmodload -i zsh/complist
