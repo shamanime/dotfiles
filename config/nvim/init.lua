@@ -982,9 +982,9 @@ vim.lsp.config("lua_ls", {
 })
 
 vim.lsp.config("expert", {
-  cmd = { vim.fn.expand("~/code/elixir-lang/expert/apps/expert/_build/prod/rel/plain/bin/start_expert"), "--stdio" },
+  cmd = { "expert", "--stdio" },
   root_markers = { "mix.exs", ".git" },
-  filetypes = { "elixir", "eelixir", "heex" },
+  filetypes = { "elixir", "eex", "heex" },
 })
 
 vim.lsp.config("tailwindcss", {})
@@ -1000,9 +1000,10 @@ vim.lsp.config("copilot", {
 vim.lsp.config("rust_analyzer", {
   settings = {
     ["rust-analyzer"] = {
-      checkOnSave = {
+      cargo = {
         allFeatures = true,
       },
+      checkOnSave = true,
       diagnostics = {
         disabled = { "inactive-code" },
       },
@@ -1027,6 +1028,23 @@ end
 -- other
 require("other-nvim").setup({
   showMissingFiles = true,
+  hooks = {
+    onFindOtherFiles = function(matches)
+      local has_existing = false
+      for _, f in ipairs(matches) do
+        if f.exists then
+          has_existing = true
+          break
+        end
+      end
+      if not has_existing then
+        return matches
+      end
+      return vim.tbl_filter(function(f)
+        return f.exists
+      end, matches)
+    end,
+  },
   mappings = {
     "elixir",
     "rust",

@@ -38,8 +38,11 @@ export ECTO_EDITOR=$ELIXIR_EDITOR
 export MIX_OS_DEPS_COMPILE_PARTITION_COUNT=5
 
 # github
-export GITHUB_TOKEN=$(gh auth token)
+command -v gh >/dev/null 2>&1 && export GITHUB_TOKEN=$(gh auth token)
 
 # gh
 export GH_TELEMETRY=false
 export DO_NOT_TRACK=true
+
+# ripgrep
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
