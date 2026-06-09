@@ -1,0 +1,40 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+!.gitignore
+*~
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*.sublime-workspace
+.sensitive
+tags
+*.log
+Package Control.last-run
+Package Control.ca-list
+Package Control.ca-bundle
+Package Control.system-ca-bundle
+Package Control.cache
+Package Control.ca-certs
+Package Control.merged-ca-bundle
+Package Control.user-ca-bundle
+*.crt
+.ctags.d
+/config/pgcli/history
+/config/pgcli/log
+/config/zed/embeddings
+/config/zed/conversations
+/config/zed/prompts
+/config/lazygit/state.yml
+/config/lazygit/state.yml
+/config/opencode/package-lock.json
+*.tmp*

@@ -1,0 +1,31 @@
+os:
+  # edit: 'nvim --server "$NVIM" --remote-tab {{filename}}'
+  # editAtLine: 'nvim --server "$NVIM" --remote-tab {{filename}}; [ -z "$NVIM" ] || nvim --server "$NVIM" --remote-send ":{{line}}<CR>"'
+  # editAtLineAndWait: 'nvim +{{line}} {{filename}}'
+  edit: 'zed {{filename}}'
+promptToReturnFromSubprocess: false
+gui:
+  # https://github.com/catppuccin/lazygit/blob/main/themes/frappe/blue.yml
+  theme:
+    activeBorderColor:
+      - '#8caaee'
+      - bold
+    inactiveBorderColor:
+      - '#a5adce'
+    optionsTextColor:
+      - '#8caaee'
+    selectedLineBgColor:
+      - '#414559'
+    cherryPickedCommitBgColor:
+      - '#51576d'
+    cherryPickedCommitFgColor:
+      - '#8caaee'
+    unstagedChangesColor:
+      - '#e78284'
+    defaultFgColor:
+      - '#c6d0f5'
+    searchingActiveBorderColor:
+      - '#e5c890'
+
+authorColors:
+  '*': '#babbf1'

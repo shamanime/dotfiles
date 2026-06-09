@@ -1,0 +1,84 @@
+[user]
+  name = Jefferson Venerando
+  email = jefferson@jvenerando.com
+  username = shamanime
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAR5/oXI/ypeIvtu+jwdeJ6ijwvKlDfV9gbuslThf9lc
+[github]
+  user = shamanime
+[core]
+  excludesfile = ~/.gitignore
+  autocrlf = input
+  editor = nvim
+[color]
+  ui = true
+[push]
+	default = upstream
+  autoSetupRemote = true
+[init]
+  defaultBranch = main
+[fetch]
+  prune = true
+  pruneTags = true
+[merge]
+  conflictstyle = zdiff3
+[rebase]
+  updateRefs = true
+  autoStash = true
+[pull]
+  rebase = true
+  ff = only
+[diff]
+  external = difft
+[grep]
+  extendRegexp = true
+  lineNumber = true
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+[alias]
+  aa = !git add --all && git status -sb
+  ca = commit --amend
+  ci = commit -a
+  co = checkout
+  cl = clone
+  st = status
+  df = diff
+  wt = worktree
+  dc = diff --cached
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  ll = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  g = grep --break --heading --line-number
+  delete-branch = !sh -c 'git push origin :refs/heads/$1 && git remote prune origin && git branch -D $1' -
+  delete-tag = !sh -c 'git tag -d $1 && git push origin -d $1' -
+  squash = rebase -i @{u}
+  up = !sh -c 'git set-upstream && git fetch && git pull --rebase' -
+  cp = cherry-pick
+  set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+  prw = !/Users/jvenerando/.local/bin/git-prw
+	prune-gone = !git fetch --prune && git branch -vv | awk \"/: gone]/{print \\$1}\" | xargs -r git branch -D
+[commit]
+  gpgsign = true
+[gpg]
+  program = /opt/homebrew/bin/gpg
+  format = ssh
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[maintenance]
+	repo = /Users/jvenerando/.config/zsh-config/znap
+	repo = /Users/jvenerando/.config/zsh-config/mafredri/zsh-async
+	repo = /Users/jvenerando/.config/zsh-config/ohmyzsh/ohmyzsh
+	repo = /Users/jvenerando/.config/zsh-config/sorin-ionescu/prezto
+	repo = /Users/jvenerando/.config/zsh-config/zdharma-continuum/fast-syntax-highlighting
+	repo = /Users/jvenerando/.config/zsh-config/zsh-users/zsh-autosuggestions
+	repo = /Users/jvenerando/.config/zsh-config/zsh-users/zsh-history-substring-search
+	repo = /Users/jvenerando/.config/zsh-config/zsh-users/zsh-syntax-highlighting
+	repo = /Users/jvenerando/.config/zsh-config/marlonrichert/zsh-autocomplete
+	repo = /Users/jvenerando/.config/zsh-config/zsh-users/zsh-completions
+	repo = /Users/jvenerando/.config/zsh-config/jeffreytse/zsh-vi-mode
+	repo = /Users/jvenerando/.config/zsh-config/sindresorhus/pure
+[branch]
+	sort = -committerdate
+[rerere]
+	enabled = true

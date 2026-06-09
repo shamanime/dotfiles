@@ -1,0 +1,45 @@
+# vi: ft=zsh
+
+bindkey -v
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+# bindkey '^o' autosuggest-accept
+bindkey '^[w' kill-region
+
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+export EDITOR="nvim"
+export GIT_EDITOR="nvim"
+export VISUAL=$EDITOR
+export MANPAGER='less -X';
+export GPG_TTY=$(tty);
+
+# erlang
+export ERL_AFLAGS="-kernel shell_history enabled"
+export KERL_BUILD_DOCS=yes
+
+# elixir
+export ELIXIR_EDITOR="zed __FILE__:__LINE__"
+export PLUG_EDITOR=$ELIXIR_EDITOR
+export ECTO_EDITOR=$ELIXIR_EDITOR
+export MIX_OS_DEPS_COMPILE_PARTITION_COUNT=5
+
+# github
+export GITHUB_TOKEN=$(gh auth token)
+
+# gh
+export GH_TELEMETRY=false
+export DO_NOT_TRACK=true

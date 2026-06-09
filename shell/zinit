@@ -1,0 +1,39 @@
+# vi: ft=zsh
+
+# https://github.com/zdharma-continuum/zinit
+# https://github.com/probberechts/dotfiles/blob/master/zsh/zinit.zsh
+
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit light sindresorhus/pure
+
+zinit wait lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+  zdharma/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start;bindkey '^o' autosuggest-accept" \
+  zsh-users/zsh-autosuggestions \
+  blockf atpull'zinit creinstall -q .' \
+  zsh-users/zsh-completions
+
+zinit from"gh-r" as"program" mv"direnv* -> direnv" \
+    atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
+    pick"direnv" src="zhook.zsh" for \
+        direnv/direnv
+
+zinit as="command" lucid from="gh-r" for \
+    id-as="usage" \
+    atpull="%atclone" \
+    jdx/usage
+
+zinit ice as"completion"
+zinit snippet OMZ::plugins/mix-fast/mix-fast.plugin.zsh
+
+zinit wait'1' lucid for \
+  OMZP::extract
+
+zinit ice wait lucid as"completion"
+zinit snippet "$HOME/.dotfiles/shell/completions/_just"
