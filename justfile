@@ -143,7 +143,6 @@ check:
     echo "Git:"
     git config --global user.name &> /dev/null && echo "  ✓ user.name: $(git config --global user.name)" || echo "  ✗ user.name"
     git config --global user.email &> /dev/null && echo "  ✓ user.email: $(git config --global user.email)" || echo "  ✗ user.email"
-    echo "  $(test -f "$HOME/.gnupg/gpg-agent.conf" && printf '✓' || printf '✗') gpg-agent.conf"
 
     echo ""
     echo "Checking Homebrew env..."
