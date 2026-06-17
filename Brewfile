@@ -24,7 +24,7 @@ brew "tree"
 brew "wxwidgets"
 brew "zsh"
 
-cask "brave"
+cask "brave-browser"
 cask "dash"
 cask "devtoys"
 cask "devutils"
