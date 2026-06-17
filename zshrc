@@ -40,6 +40,3 @@ function y() {
 [[ "$ZPROF" == "1" ]] && zprof
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# opencode
-export PATH=/Users/jvenerando/.opencode/bin:$PATH

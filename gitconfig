@@ -8,7 +8,7 @@
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
-  editor = nvim
+  editor = zed
 [color]
   ui = true
 [push]
@@ -57,7 +57,6 @@
   cp = cherry-pick
   set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
   prw = !/Users/jvenerando/.local/bin/git-prw
-	prune-gone = !git fetch --prune && git branch -vv | awk \"/: gone]/{print \\$1}\" | xargs -r git branch -D
 [commit]
   gpgsign = true
 [gpg]
