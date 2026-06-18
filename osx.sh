@@ -45,18 +45,24 @@ defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # Enable tap to click globally.
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# Disable natural scrolling.
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+# Ensure natural scrolling.
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 # Hide Spotlight from the menu bar.
 defaults write com.apple.Spotlight MenuItemHidden -bool true
 
 # Disable Spotlight keyboard shortcuts so another launcher can use Command+Space.
-symbolic_hotkeys_plist="$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
-for key in 64 65; do
-  /usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:${key}:enabled false" "$symbolic_hotkeys_plist" 2>/dev/null || \
-    /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key}:enabled bool false" "$symbolic_hotkeys_plist"
-done
+# Hotkey 64 = Show Spotlight search (Cmd+Space).
+# Hotkey 65 = Show Finder search window (Cmd+Option+Space).
+# Editing the plist directly is unreliable because cfprefsd caches it; go through `defaults`
+# and then ask the system to reload the symbolic hotkeys table.
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 \
+  '{ enabled = 0; value = { parameters = (32, 49, 1048576); type = "standard"; }; }'
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 65 \
+  '{ enabled = 0; value = { parameters = (32, 49, 1572864); type = "standard"; }; }'
+
+# Apply the symbolic hotkey changes without requiring a logout.
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u 2>/dev/null || true
 
 # Remove any delay before password is required.
 defaults write com.apple.screensaver askForPasswordDelay -int 0
@@ -87,6 +93,12 @@ chflags nohidden "$HOME/Library"
 
 # Automatically hide the Dock.
 defaults write com.apple.dock autohide -bool true
+
+# Remove the delay before the auto-hidden Dock appears on hover.
+defaults write com.apple.dock autohide-delay -float 0
+
+# Remove the Dock show/hide animation duration for instant reveal.
+defaults write com.apple.dock autohide-time-modifier -float 0
 
 # Hide recent applications in the Dock.
 defaults write com.apple.dock show-recents -bool false
