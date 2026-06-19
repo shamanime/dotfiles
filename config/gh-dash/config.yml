@@ -99,9 +99,6 @@ keybindings:
       command: open {{.RepoPath}}
       name: open in finder
   prs:
-    - key: a
-      command: gh pr review --repo {{.RepoName}} --approve {{.PrNumber}}
-      name: approve
     - key: M
       command: gh pr merge --repo {{.RepoName}} {{.PrNumber}} --squash --delete-branch
       name: squash merge & delete branch
@@ -119,6 +116,20 @@ theme:
     table:
       showSeparator: true
       compact: false
+  colors:
+    text:
+      primary: "#f8f8f2"
+      secondary: "#ff79c6"
+      inverted: "#282a36"
+      faint: "#ffb86c"
+      warning: "#ff5555"
+      success: "#50fa7b"
+    background:
+      selected: "#AD85FC"
+    border:
+      primary: "#383B5B"
+      secondary: "#39386B"
+      faint: "#2B2B40"
 pager:
   diff: delta
 confirmQuit: false

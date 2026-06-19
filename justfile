@@ -1,7 +1,7 @@
 default:
     @just --list
 
-install: link-root link-config apps-osx apps-mise apps-npm
+install: link-root link-config yazi-theme apps-osx apps-mise apps-npm
 
 update:
     #!/usr/bin/env zsh
@@ -88,6 +88,23 @@ link-config:
         rm -rf "$target"
         ln -s "$PWD/$name" "$target"
     done
+
+yazi-theme:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    theme_dir="$HOME/.config/yazi/flavors/dracula.yazi"
+
+    mkdir -p "$(dirname "$theme_dir")"
+
+    if [ -d "$theme_dir/.git" ]; then
+        git -C "$theme_dir" pull --ff-only
+    elif [ -e "$theme_dir" ]; then
+        echo "$theme_dir exists but is not a git checkout; remove it and rerun." >&2
+        exit 1
+    else
+        git clone https://github.com/dracula/yazi.git "$theme_dir"
+    fi
 
 supercmd-sync:
     #!/usr/bin/env bash
