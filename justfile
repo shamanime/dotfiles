@@ -85,6 +85,17 @@ link-config:
         target="$HOME/.$name"
         echo "$target"
         mkdir -p "$(dirname "$target")"
+        case "$(basename "$name")" in
+            fish)
+                mkdir -p "$target"
+                for file in "$PWD/$name"/*; do
+                    link_target="$target/$(basename "$file")"
+                    rm -rf "$link_target"
+                    ln -s "$file" "$link_target"
+                done
+                continue
+                ;;
+        esac
         rm -rf "$target"
         ln -s "$PWD/$name" "$target"
     done
@@ -147,7 +158,7 @@ check:
     echo "Checking dotfiles installation..."
     echo ""
     echo "Binaries:"
-    binaries=(nvim zsh git fzf zoxide eza bat fd rg lazygit mise)
+    binaries=(nvim zsh fish git fzf zoxide eza bat fd rg lazygit mise)
     for bin in "${binaries[@]}"; do
         if command -v "$bin" &> /dev/null; then
             echo "  ✓ $bin"
