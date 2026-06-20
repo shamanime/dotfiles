@@ -35,10 +35,8 @@ window-inherit-font-size = true
 window-theme = system
 mouse-hide-while-typing = true
 macos-titlebar-proxy-icon = hidden
-macos-icon = custom-style
-macos-icon-frame = plastic
-macos-icon-ghost-color = FFFFFF
-macos-icon-screen-color = 000000
+macos-icon = custom
+macos-custom-icon = ~/.config/ghostty/dracula.icns
 
 # https://ghostty.org/docs/config/keybind/reference
 keybind = super+r=reload_config
