@@ -2,17 +2,16 @@
 
 ### Bootstrap
 
-1. Install [brew](https://brew.sh)
+1. Install [mise](https://mise.jdx.dev)
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+curl https://mise.run | sh
 ```
 
-2. Install pre-requisites
+2. Install Git
 
-```
-eval "$(/opt/homebrew/bin/brew shellenv)"
-brew install git just
+```sh
+MISE_EXPERIMENTAL=1 ~/.local/bin/mise bootstrap packages install brew:git --yes --update
 ```
 
 3. Bootstrap
@@ -20,5 +19,6 @@ brew install git just
 ```sh
 git clone git@github.com:shamanime/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-just install
+~/.local/bin/mise trust "$PWD/config/mise/config.toml"
+MISE_GLOBAL_CONFIG_FILE="$PWD/config/mise/config.toml" ~/.local/bin/mise bootstrap --yes --force-dotfiles
 ```

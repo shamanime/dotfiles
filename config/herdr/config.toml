@@ -1,0 +1,5 @@
+[theme]
+name = "dracula"
+
+[ui.toast.clipboard]
+position = "top-right"

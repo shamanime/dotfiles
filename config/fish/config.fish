@@ -4,7 +4,7 @@ if test -f ~/.sensitive.fish
     source ~/.sensitive.fish
 end
 
-fish_add_path --global --prepend /opt/homebrew/bin /opt/homebrew/sbin
+fish_add_path --global --prepend /opt/homebrew/bin /opt/homebrew/sbin $HOME/.local/bin
 
 if test -x /opt/homebrew/bin/brew
     /opt/homebrew/bin/brew shellenv | source
@@ -13,15 +13,6 @@ end
 if command -q mise
     mise activate fish | source
 end
-
-set -gx COREUTILS_BIN /opt/homebrew/opt/coreutils/libexec/gnubin
-set -gx GPG_BIN /opt/homebrew/opt/gnupg/bin
-set -gx GNU_SED_BIN /opt/homebrew/opt/gnu-sed/libexec/gnubin
-set -gx FLYCTL_HOME $HOME/.fly
-set -gx CARGO_BIN $HOME/.cargo/bin
-set -gx OPENJDK_BIN /opt/homebrew/opt/openjdk/bin
-set -gx POSTGRES_BIN /Applications/Postgres.app/Contents/Versions/latest/bin
-set -gx OPENCODE_BIN $HOME/.opencode/bin
 
 fish_add_path --global --append \
     $HOME/.bin \
@@ -37,13 +28,7 @@ fish_add_path --global --append \
     $POSTGRES_BIN \
     $OPENCODE_BIN \
     /usr/local/lib \
-    /usr/local/sbin \
-    /usr/bin \
-    /usr/sbin \
-    /bin \
-    /sbin
-
-set -gx MANPATH /usr/local/opt/gnu-sed/libexec/gnuman $MANPATH
+    /usr/local/sbin
 
 if test (uname) = Darwin; and command -q ssh-add
     ssh-add --apple-load-keychain -q >/dev/null 2>&1
@@ -51,27 +36,11 @@ end
 
 fish_vi_key_bindings
 
-set -gx EDITOR zed
-set -gx GIT_EDITOR zed
-set -gx VISUAL $EDITOR
-set -gx MANPAGER 'less -X'
 set -gx GPG_TTY (tty)
-
-set -gx ERL_AFLAGS '-kernel shell_history enabled'
-set -gx KERL_BUILD_DOCS yes
-
-set -gx ELIXIR_EDITOR 'zed __FILE__:__LINE__'
-set -gx PLUG_EDITOR $ELIXIR_EDITOR
-set -gx ECTO_EDITOR $ELIXIR_EDITOR
-set -gx MIX_OS_DEPS_COMPILE_PARTITION_COUNT 5
 
 if command -q gh
     set -gx GITHUB_TOKEN (gh auth token 2>/dev/null)
 end
-
-set -gx GH_TELEMETRY false
-set -gx DO_NOT_TRACK true
-set -gx RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/ripgreprc
 
 alias asdf='mise'
 alias cc='claude --allow-dangerously-skip-permissions'
@@ -99,7 +68,8 @@ alias mtf='mix test --failed'
 alias rm='rm -i'
 alias tf='terraform'
 alias ts='tree-sitter'
-alias up='just --working-directory $HOME/.dotfiles update'
+alias up='mise -C $HOME/.dotfiles run update'
+alias jq='jaq'
 
 abbr --add ... 'cd ../..'
 abbr --add .... 'cd ../../..'

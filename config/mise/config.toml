@@ -1,6 +1,101 @@
+[settings]
+dotfiles.root = "~/.dotfiles"
+env_shell_expand = true
+experimental = true
+
+[bootstrap.packages]
+"brew-cask:dash" = "latest"
+"brew-cask:devtoys" = "latest"
+# "brew-cask:devutils" = "latest"
+# "brew-cask:discord" = "latest"
+"brew-cask:font-hack-nerd-font" = "latest"
+"brew-cask:muzzle" = "latest"
+# "brew-cask:postgres-app" = "latest"
+# "brew-cask:proton-mail" = "latest"
+# "brew-cask:slack" = "latest"
+# "brew-cask:tableplus" = "latest"
+"brew:autoconf" = "latest"
+"brew:automake" = "latest"
+"brew:btop" = "latest"
+"brew:cmark-gfm" = "latest"
+"brew:codespell" = "latest"
+"brew:coreutils" = "latest"
+"brew:fish" = "latest"
+"brew:fzy" = "latest"
+"brew:gcc" = "latest"
+"brew:git" = "latest"
+"brew:gnu-sed" = "latest"
+"brew:gnupg" = "latest"
+"brew:grep" = "latest"
+"brew:jaq" = "latest"
+"brew:mole" = "latest"
+"brew:opencode" = "latest"
+"brew:openssl@3" = "latest"
+"brew:pgcli" = "latest"
+"brew:pinentry-mac" = "latest"
+"brew:renameutils" = "latest"
+"brew:ripgrep" = "latest"
+"brew:tree" = "latest"
+"brew:wxwidgets" = "latest"
+"brew:zsh" = "latest"
+
+[dotfiles]
+"~/.config/bat" = "~/.dotfiles/config/bat"
+"~/.claude/CLAUDE.md" = "~/.dotfiles/claude/CLAUDE.md"
+"~/.claude/settings.json" = "~/.dotfiles/claude/settings.json"
+"~/.config/fish" = "~/.dotfiles/config/fish"
+"~/.config/gh-dash" = "~/.dotfiles/config/gh-dash"
+"~/.config/ghostty" = "~/.dotfiles/config/ghostty"
+"~/.config/git" = "~/.dotfiles/config/git"
+"~/.config/herdr/config.toml" = "~/.dotfiles/config/herdr/config.toml"
+"~/.config/lazygit" = "~/.dotfiles/config/lazygit"
+"~/.config/mise" = "~/.dotfiles/config/mise"
+"~/.config/opencode" = "~/.dotfiles/config/opencode"
+"~/.config/pgcli" = "~/.dotfiles/config/pgcli"
+"~/.config/ripgrep" = "~/.dotfiles/config/ripgrep"
+"~/.config/yazi" = "~/.dotfiles/config/yazi"
+"~/.gitconfig" = "~/.dotfiles/gitconfig"
+"~/.gitignore" = "~/.dotfiles/gitignore"
+"~/.iex.exs" = "~/.dotfiles/iex.exs"
+"~/.psqlrc" = "~/.dotfiles/psqlrc"
+"~/.shell" = "~/.dotfiles/shell"
+"~/.zshrc" = "~/.dotfiles/zshrc"
+
+[bootstrap.macos.dock]
+autohide = true
+show_recents = false
+
+[bootstrap.macos.finder]
+show_extensions_warning = false
+show_pathbar = true
+show_status_bar = true
+show_all_files = true
+
+[bootstrap.macos.keyboard]
+initial_key_repeat = 10
+key_repeat = 1
+press_and_hold = false
+
+[bootstrap.macos.trackpad]
+tap_to_click = true
+
+[bootstrap.hooks.post-defaults]
+run = """
+symbolic_hotkeys_plist="$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
+for key in 64 65; do
+  /usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:${key}:enabled false" "$symbolic_hotkeys_plist" 2>/dev/null || \
+    /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:${key}:enabled bool false" "$symbolic_hotkeys_plist"
+done
+chflags nohidden "$HOME/Library"
+for app in "Dock" "Finder" "Safari" "Spotlight" "SystemUIServer"; do
+  killall "$app" >/dev/null 2>&1 || true
+done
+"""
 
 [tools]
 "aqua:elixir-lang/expert" = "latest"
+"npm:@fsouza/prettierd" = "latest"
+"npm:@github/copilot-language-server" = "latest"
 "npm:typescript" = "latest"
 ast-grep = "latest"
 awscli = "latest"
@@ -10,7 +105,7 @@ cmake = "latest"
 codex = "latest"
 difftastic = "latest"
 dust = "latest"
-elixir = "main-otp-28"
+elixir = "main-otp-29"
 emsdk = "latest"
 erlang = "latest"
 eza = "latest"
@@ -22,7 +117,6 @@ git-cliff = "latest"
 git-lfs = "latest"
 glow = "latest"
 go = "latest"
-jq = "latest"
 just = "latest"
 lazygit = "latest"
 lua = "latest"
@@ -33,7 +127,6 @@ pnpm = "latest"
 python = "3"
 rust = { version = "latest", components = "rust-src,rust-analyzer,rustfmt" }
 stylua = "latest"
-terraform = "latest"
 tree-sitter = "0.26.6"
 typos = "latest"
 uv = "latest"
@@ -41,3 +134,142 @@ vercel = "latest"
 yazi = "latest"
 zig = "latest"
 zoxide = "latest"
+
+[env]
+DO_NOT_TRACK = "true"
+ECTO_EDITOR = "zed __FILE__:__LINE__"
+EDITOR = "zed"
+ELIXIR_EDITOR = "zed __FILE__:__LINE__"
+ERL_AFLAGS = "-kernel shell_history enabled"
+FLYCTL_HOME = "$HOME/.fly"
+GH_TELEMETRY = "false"
+GIT_EDITOR = "zed"
+KERL_BUILD_DOCS = "yes"
+MANPAGER = "less -X"
+MIX_OS_DEPS_COMPILE_PARTITION_COUNT = "5"
+PLUG_EDITOR = "zed://file/__FILE__:__LINE__"
+RIPGREP_CONFIG_PATH = "$HOME/.config/ripgrep/ripgreprc"
+VISUAL = "zed"
+
+[env._]
+path = [
+  "/opt/homebrew/opt/coreutils/libexec/gnubin",
+  "/opt/homebrew/opt/gnupg/bin",
+  "/opt/homebrew/opt/gnu-sed/libexec/gnubin",
+  "/opt/homebrew/opt/grep/libexec/gnubin",
+  "/opt/homebrew/opt/openjdk/bin",
+  "$HOME/.bin",
+  "$HOME/.local/bin",
+  "./bin",
+  "$HOME/.fly/bin",
+  "$HOME/.cargo/bin",
+  "/Applications/Postgres.app/Contents/Versions/latest/bin",
+  "$HOME/.opencode/bin",
+]
+
+[shell_alias]
+"...." = "cd ../../.."
+"..." = "cd ../.."
+".." = "cd .."
+asdf = "mise"
+cc = "claude --allow-dangerously-skip-permissions"
+cx = "codex"
+df = "df -h"
+dns_reset = "dscacheutil -flushcache && killall -HUP mDNSResponder"
+du = "du -h"
+e = "nvim"
+g = "git"
+gg = "lazygit"
+l = "ls"
+ll = "eza --long --icons --sort modified --reverse --git"
+ls = "eza --icons --sort modified --reverse --git"
+oc = "opencode"
+rm = "rm -i"
+ts = "tree-sitter"
+up = "cd $HOME/.dotfiles && mise run up"
+jq = "jaq"
+
+[tasks.bootstrap]
+description = "Run idempotent setup not covered by declarative bootstrap sections"
+shell = "bash -c"
+run = """
+set -euo pipefail
+mise run yazi-theme
+"""
+
+[tasks.update]
+description = "Update system packages, mise tools, zinit, and opencode patches"
+shell = "bash -c"
+run = """
+set -euo pipefail
+mise bootstrap packages install --yes --update
+mise bootstrap packages upgrade --yes
+brew cleanup
+rtk init -g --opencode --auto-patch
+zsh -lc 'source "$HOME/.shell/zinit" && zinit self-update && zinit update'
+mise plugins up
+mise up
+"""
+
+[tasks.clean]
+description = "Clean package-manager caches and generated artifacts"
+shell = "bash -c"
+run = """
+set -euo pipefail
+
+printf 'Run cleanup? This deletes caches, unused mise tool versions, Docker artifacts, and node_modules under $HOME/code. [y/N] '
+read -r confirm
+case "$confirm" in
+  [yY]) ;;
+  *) echo "Cancelled."; exit 0 ;;
+esac
+
+echo "==> Homebrew"
+brew autoremove
+brew cleanup --prune=all
+
+echo "==> mise"
+mise cache prune
+mise prune
+
+echo "==> npm"
+npm cache verify
+npx --yes npkill --directory "$HOME/code" --exclude-sensitive --delete-all -y
+
+echo "==> mac-cleaner-cli"
+echo "Leave browser categories unselected. mac-cleaner-cli has no non-interactive browser skip flag."
+npx --yes mac-cleaner-cli
+
+echo "==> Cargo"
+if ! command -v cargo-cache >/dev/null; then
+  cargo install cargo-cache
+fi
+cargo cache --autoclean
+
+echo "==> Docker"
+if command -v docker >/dev/null && docker info >/dev/null 2>&1; then
+  docker system prune --all --force
+  docker builder prune --all --force
+else
+  echo "Docker is not running; skipping."
+fi
+"""
+
+[tasks.yazi-theme]
+description = "Install or update the Dracula Yazi flavor"
+shell = "bash -c"
+run = """
+set -euo pipefail
+
+theme_dir="$HOME/.config/yazi/flavors/dracula.yazi"
+mkdir -p "$(dirname "$theme_dir")"
+
+if [ -d "$theme_dir/.git" ]; then
+  git -C "$theme_dir" pull --ff-only
+elif [ -e "$theme_dir" ]; then
+  echo "$theme_dir exists but is not a git checkout; remove it and rerun." >&2
+  exit 1
+else
+  git clone https://github.com/dracula/yazi.git "$theme_dir"
+fi
+"""
