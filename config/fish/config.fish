@@ -42,35 +42,6 @@ if command -q gh
     set -gx GITHUB_TOKEN (gh auth token 2>/dev/null)
 end
 
-alias asdf='mise'
-alias cc='claude --allow-dangerously-skip-permissions'
-alias oc='opencode'
-alias cx='codex'
-alias df='df -h'
-alias dns_reset='dscacheutil -flushcache && killall -HUP mDNSResponder'
-alias du='du -h'
-alias e='zed'
-alias g='git'
-alias gg='lazygit'
-alias l='ls'
-alias ll='eza --long --icons --sort modified --reverse --git'
-alias ls='eza --icons --sort modified --reverse --git'
-alias m='gemini'
-alias mc='mix compile'
-alias mdg='mix deps.get'
-alias mdc='mix deps.clean --unused'
-alias mf='mix format'
-alias mis='iex -S mix'
-alias mphx='iex -S mix phx.server'
-alias mt='mix test'
-alias mtd='mix test --stale'
-alias mtf='mix test --failed'
-alias rm='rm -i'
-alias tf='terraform'
-alias ts='tree-sitter'
-alias up='mise -C $HOME/.dotfiles run update'
-alias jq='jaq'
-
 abbr --add ... 'cd ../..'
 abbr --add .... 'cd ../../..'
 
@@ -80,10 +51,6 @@ end
 
 if command -q zoxide
     zoxide init --cmd j fish | source
-end
-
-if command -q direnv
-    direnv hook fish | source
 end
 
 function fish_title

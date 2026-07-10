@@ -40,26 +40,21 @@ experimental = true
 "brew:zsh" = "latest"
 
 [dotfiles]
-"~/.config/bat" = "~/.dotfiles/config/bat"
-"~/.claude/CLAUDE.md" = "~/.dotfiles/claude/CLAUDE.md"
-"~/.claude/settings.json" = "~/.dotfiles/claude/settings.json"
-"~/.config/fish" = "~/.dotfiles/config/fish"
-"~/.config/gh-dash" = "~/.dotfiles/config/gh-dash"
-"~/.config/ghostty" = "~/.dotfiles/config/ghostty"
-"~/.config/git" = "~/.dotfiles/config/git"
-"~/.config/herdr/config.toml" = "~/.dotfiles/config/herdr/config.toml"
-"~/.config/lazygit" = "~/.dotfiles/config/lazygit"
-"~/.config/mise" = "~/.dotfiles/config/mise"
-"~/.config/opencode" = "~/.dotfiles/config/opencode"
-"~/.config/pgcli" = "~/.dotfiles/config/pgcli"
-"~/.config/ripgrep" = "~/.dotfiles/config/ripgrep"
-"~/.config/yazi" = "~/.dotfiles/config/yazi"
-"~/.gitconfig" = "~/.dotfiles/gitconfig"
-"~/.gitignore" = "~/.dotfiles/gitignore"
-"~/.iex.exs" = "~/.dotfiles/iex.exs"
-"~/.psqlrc" = "~/.dotfiles/psqlrc"
+"~/.claude/*" = "~/.dotfiles/claude/*"
+"~/.config/*" = "~/.dotfiles/config/*"
 "~/.shell" = "~/.dotfiles/shell"
-"~/.zshrc" = "~/.dotfiles/zshrc"
+"~/.gitconfig" = {}
+"~/.gitignore" = {}
+"~/.iex.exs" = {}
+"~/.psqlrc" = {}
+"~/.zshrc" = {}
+
+[bootstrap.mise_shell_activate]
+zprofile = "shims"
+zshrc = "activate"
+bash_profile = "shims"
+bashrc = "activate"
+fish = "activate"
 
 [bootstrap.macos.dock]
 autohide = true

@@ -8,6 +8,8 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
+fpath=("$HOME/.dotfiles/shell/completions" $fpath)
+
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
 
@@ -34,6 +36,3 @@ zinit snippet OMZ::plugins/mix-fast/mix-fast.plugin.zsh
 
 zinit wait'1' lucid for \
   OMZP::extract
-
-zinit ice wait lucid as"completion"
-zinit snippet "$HOME/.dotfiles/shell/completions/_just"
