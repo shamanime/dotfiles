@@ -20,6 +20,8 @@ experimental = true
 "brew:cmark-gfm" = "latest"
 "brew:codespell" = "latest"
 "brew:coreutils" = "latest"
+"brew:eza" = "latest"
+"brew:moshi-hook" = "latest"
 "brew:fish" = "latest"
 "brew:fzy" = "latest"
 "brew:gcc" = "latest"
@@ -29,6 +31,7 @@ experimental = true
 "brew:grep" = "latest"
 "brew:jaq" = "latest"
 "brew:mole" = "latest"
+"brew:mosh" = "latest"
 "brew:opencode" = "latest"
 "brew:openssl@3" = "latest"
 "brew:pgcli" = "latest"
@@ -36,15 +39,17 @@ experimental = true
 "brew:renameutils" = "latest"
 "brew:ripgrep" = "latest"
 "brew:tree" = "latest"
+"brew:worktrunk" = "latest"
 "brew:wxwidgets" = "latest"
 "brew:zsh" = "latest"
 
 [dotfiles]
 "~/.claude/*" = "~/.dotfiles/claude/*"
+"~/.pi/*" = "~/.dotfiles/pi/*"
 "~/.config/*" = "~/.dotfiles/config/*"
 "~/.shell" = "~/.dotfiles/shell"
 "~/.gitconfig" = {}
-"~/.gitignore" = {}
+"~/.gitignore" = "~/.dotfiles/gitignore"
 "~/.iex.exs" = {}
 "~/.psqlrc" = {}
 "~/.zshrc" = {}
@@ -74,6 +79,9 @@ press_and_hold = false
 [bootstrap.macos.trackpad]
 tap_to_click = true
 
+[bootstrap.hooks.post-packages]
+run = "wt config shell install"
+
 [bootstrap.hooks.post-defaults]
 run = """
 symbolic_hotkeys_plist="$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
@@ -87,8 +95,13 @@ for app in "Dock" "Finder" "Safari" "Spotlight" "SystemUIServer"; do
 done
 """
 
+[bootstrap.brew.taps]
+"rjyo/moshi" = "https://github.com/rjyo/homebrew-moshi.git"
+
 [tools]
 "aqua:elixir-lang/expert" = "latest"
+"aqua:openai/codex" = "latest"
+"npm:@earendil-works/pi-coding-agent" = "latest"
 "npm:@fsouza/prettierd" = "latest"
 "npm:@github/copilot-language-server" = "latest"
 "npm:typescript" = "latest"
@@ -97,13 +110,11 @@ awscli = "latest"
 bat = "latest"
 bun = "latest"
 cmake = "latest"
-codex = "latest"
 difftastic = "latest"
 dust = "latest"
 elixir = "main-otp-29"
 emsdk = "latest"
 erlang = "latest"
-eza = "latest"
 fd = "latest"
 flyctl = "latest"
 fzf = "latest"
@@ -197,13 +208,12 @@ description = "Update system packages, mise tools, zinit, and opencode patches"
 shell = "bash -c"
 run = """
 set -euo pipefail
-mise bootstrap packages install --yes --update
+mise bootstrap packages apply --yes
 mise bootstrap packages upgrade --yes
-brew cleanup
-rtk init -g --opencode --auto-patch
-zsh -lc 'source "$HOME/.shell/zinit" && zinit self-update && zinit update'
-mise plugins up
 mise up
+pi update --extensions
+brew cleanup
+zsh -lc 'source "$HOME/.shell/zinit" && zinit self-update && zinit update'
 """
 
 [tasks.clean]

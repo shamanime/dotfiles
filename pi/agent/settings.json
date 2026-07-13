@@ -1,0 +1,18 @@
+{
+  "theme": "dracula",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "defaultThinkingLevel": "medium",
+  "packages": [
+    "npm:pi-web-access",
+    "npm:pi-mcp-adapter",
+    "npm:context-mode",
+    "npm:pi-elixir",
+    "npm:pi-subagents",
+    "npm:pi-lens",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@ff-labs/pi-fff"
+  ],
+  "lastChangelogVersion": "0.80.6"
+}

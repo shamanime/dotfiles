@@ -38,4 +38,9 @@ Package Control.user-ca-bundle
 /config/lazygit/state.yml
 /config/opencode/package-lock.json
 /config/yazi/flavors/
+/pi/agent
+!/pi/agent/keybindings.json
+!/pi/agent/mcp.json
+!/pi/agent/settings.json
+!/pi/agent/themes
 *.tmp*

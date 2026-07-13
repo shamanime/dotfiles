@@ -95,3 +95,6 @@ function web_server
     sleep 1; and open "http://localhost:$port/" &
     python -m http.server $port
 end
+# >>> mise:activate >>> managed by mise — do not edit between markers
+mise activate fish | source
+# <<< mise:activate <<<

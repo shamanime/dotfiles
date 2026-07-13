@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "transport": "streamable-http",
+      "url": "https://mcp.supabase.com/mcp",
+      "lifecycle": "eager"
+    },
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/mcp"],
+      "transport": "stdio",
+      "lifecycle": "lazy"
+    }
+  }
+}
