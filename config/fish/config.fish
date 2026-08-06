@@ -86,15 +86,8 @@ function y
     rm -f -- $tmp
 end
 
-function web_server
-    set -l port 8000
-    if test (count $argv) -gt 0
-        set port $argv[1]
-    end
+alias assume="source /opt/homebrew/bin/assume.fish"
 
-    sleep 1; and open "http://localhost:$port/" &
-    python -m http.server $port
-end
 # >>> mise:activate >>> managed by mise — do not edit between markers
 mise activate fish | source
 # <<< mise:activate <<<
