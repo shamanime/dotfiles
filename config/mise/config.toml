@@ -1,19 +1,25 @@
+min_version = "2026.9.0"
+
 [settings]
 dotfiles.root = "~/.dotfiles"
 env_shell_expand = true
 experimental = true
+idiomatic_version_file_enable_tools = ["node", "go"]
+auto_update = true
 
 [bootstrap.packages]
 "brew-cask:dash" = "latest"
 "brew-cask:devtoys" = "latest"
-# "brew-cask:devutils" = "latest"
-# "brew-cask:discord" = "latest"
+"brew-cask:devutils" = "latest"
+"brew-cask:discord" = "latest"
 "brew-cask:font-hack-nerd-font" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:linear" = "latest"
 "brew-cask:muzzle" = "latest"
-# "brew-cask:postgres-app" = "latest"
-# "brew-cask:proton-mail" = "latest"
-# "brew-cask:slack" = "latest"
-# "brew-cask:tableplus" = "latest"
+"brew-cask:postgres-app" = "latest"
+"brew-cask:proton-mail" = "latest"
+"brew-cask:slack" = "latest"
+"brew-cask:tableplus" = "latest"
 "brew:autoconf" = "latest"
 "brew:automake" = "latest"
 "brew:btop" = "latest"
@@ -32,7 +38,6 @@ experimental = true
 "brew:jaq" = "latest"
 "brew:mole" = "latest"
 "brew:mosh" = "latest"
-#"brew:moshi-hook" = "latest"
 "brew:opencode" = "latest"
 "brew:openssl@3" = "latest"
 "brew:pgcli" = "latest"
@@ -44,6 +49,14 @@ experimental = true
 "brew:wxwidgets" = "latest"
 "brew:zsh" = "latest"
 "brew:ykman" = "latest"
+
+[tasks.brew]
+description = "Install or upgrade Brewfile packages that mise can't manage"
+run = """
+set -eu
+brew trust --tap abue-ammar/tinycast
+brew bundle install --file "$HOME/.dotfiles/Brewfile" --upgrade
+"""
 
 [dotfiles]
 "~/.claude/*" = "~/.dotfiles/claude/*"
@@ -142,8 +155,10 @@ vercel = "latest"
 yazi = "latest"
 zig = "latest"
 zoxide = "latest"
+actionlint = "latest"
 
 [env]
+DOCKER_CONTEXT = "orbstack"
 DO_NOT_TRACK = "true"
 ECTO_EDITOR = "zed __FILE__:__LINE__"
 EDITOR = "zed"
@@ -216,50 +231,6 @@ mise up
 pi update --extensions
 brew cleanup
 zsh -lc 'source "$HOME/.shell/zinit" && zinit self-update && zinit update'
-"""
-
-[tasks.clean]
-description = "Clean package-manager caches and generated artifacts"
-shell = "bash -c"
-run = """
-set -euo pipefail
-
-printf 'Run cleanup? This deletes caches, unused mise tool versions, Docker artifacts, and node_modules under $HOME/code. [y/N] '
-read -r confirm
-case "$confirm" in
-  [yY]) ;;
-  *) echo "Cancelled."; exit 0 ;;
-esac
-
-echo "==> Homebrew"
-brew autoremove
-brew cleanup --prune=all
-
-echo "==> mise"
-mise cache prune
-mise prune
-
-echo "==> npm"
-npm cache verify
-npx --yes npkill --directory "$HOME/code" --exclude-sensitive --delete-all -y
-
-echo "==> mac-cleaner-cli"
-echo "Leave browser categories unselected. mac-cleaner-cli has no non-interactive browser skip flag."
-npx --yes mac-cleaner-cli
-
-echo "==> Cargo"
-if ! command -v cargo-cache >/dev/null; then
-  cargo install cargo-cache
-fi
-cargo cache --autoclean
-
-echo "==> Docker"
-if command -v docker >/dev/null && docker info >/dev/null 2>&1; then
-  docker system prune --all --force
-  docker builder prune --all --force
-else
-  echo "Docker is not running; skipping."
-fi
 """
 
 [tasks.yazi-theme]
