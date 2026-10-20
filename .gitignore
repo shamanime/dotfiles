@@ -40,9 +40,10 @@ Package Control.user-ca-bundle
 /config/herdr/.plugins.lock
 /config/herdr/session.json
 /config/yazi/flavors/
-/pi/agent
+/pi/agent/*
 !/pi/agent/keybindings.json
 !/pi/agent/mcp.json
 !/pi/agent/settings.json
+!/pi/agent/settings.defaults.json
 !/pi/agent/themes
 *.tmp*

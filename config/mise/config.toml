@@ -62,7 +62,10 @@ brew bundle install --file "$HOME/.dotfiles/Brewfile" --upgrade
 "~/.claude/CLAUDE.md" = "~/.dotfiles/claude/CLAUDE.md"
 "~/.claude/settings.json/shared" = { source = "~/.dotfiles/claude/settings.json", merge = true }
 "~/.claude/settings.json/defaults" = { source = "~/.dotfiles/claude/settings.defaults.json", merge = "missing" }
-"~/.pi/*" = "~/.dotfiles/pi/*"
+"~/.pi/agent/mcp.json" = "~/.dotfiles/pi/agent/mcp.json"
+"~/.pi/agent/themes" = "~/.dotfiles/pi/agent/themes"
+"~/.pi/agent/settings.json/shared" = { source = "~/.dotfiles/pi/agent/settings.json", merge = true }
+"~/.pi/agent/settings.json/defaults" = { source = "~/.dotfiles/pi/agent/settings.defaults.json", merge = "missing" }
 "~/.config/*" = "~/.dotfiles/config/*"
 "~/.shell" = "~/.dotfiles/shell"
 "~/.gitconfig" = {}
