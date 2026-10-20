@@ -270,3 +270,40 @@ else
   git clone https://github.com/dracula/yazi.git "$theme_dir"
 fi
 """
+
+[tasks.migrate-agent-settings]
+description = "Convert symlinked Claude Code and pi settings to mise-merged files (safe to rerun)"
+shell = "bash -c"
+run = """
+set -euo pipefail
+shopt -s dotglob nullglob
+
+if pgrep -x pi >/dev/null 2>&1; then
+  echo "pi is running; quit it and rerun." >&2
+  exit 1
+fi
+
+claude_settings="$HOME/.claude/settings.json"
+if [ -L "$claude_settings" ]; then
+  cp "$claude_settings" "$claude_settings.tmp"
+  mv -f "$claude_settings.tmp" "$claude_settings"
+  echo "Replaced $claude_settings symlink with a copy"
+fi
+
+pi_agent="$HOME/.pi/agent"
+if [ -L "$pi_agent" ]; then
+  source_dir="$(cd "$pi_agent" && pwd -P)"
+  rm "$pi_agent"
+  mkdir "$pi_agent"
+  for path in "$source_dir"/*; do
+    case "$(basename "$path")" in
+      settings.json|settings.defaults.json|mcp.json|themes) ;;
+      *) mv "$path" "$pi_agent/" ;;
+    esac
+  done
+  cp "$source_dir/settings.json" "$pi_agent/settings.json"
+  echo "Moved pi runtime data from $source_dir to $pi_agent"
+fi
+
+mise dot apply --yes
+"""
