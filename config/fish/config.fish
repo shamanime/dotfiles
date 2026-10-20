@@ -10,9 +10,13 @@ if test -x /opt/homebrew/bin/brew
     /opt/homebrew/bin/brew shellenv | source
 end
 
-if command -q mise
+# >>> mise:activate >>> managed by mise — do not edit between markers
+if status is-interactive
     mise activate fish | source
+else
+    mise activate fish --shims | source
 end
+# <<< mise:activate <<<
 
 fish_add_path --global --append \
     $HOME/.bin \
@@ -87,7 +91,3 @@ function y
 end
 
 alias assume="source /opt/homebrew/bin/assume.fish"
-
-# >>> mise:activate >>> managed by mise — do not edit between markers
-mise activate fish | source
-# <<< mise:activate <<<
