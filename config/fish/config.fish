@@ -42,10 +42,6 @@ fish_vi_key_bindings
 
 set -gx GPG_TTY (tty)
 
-if command -q gh
-    set -gx GITHUB_TOKEN (gh auth token 2>/dev/null)
-end
-
 abbr --add ... 'cd ../..'
 abbr --add .... 'cd ../../..'
 

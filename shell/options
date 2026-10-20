@@ -22,6 +22,3 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 export GPG_TTY=$(tty);
-
-# github
-command -v gh >/dev/null 2>&1 && export GITHUB_TOKEN=$(gh auth token)
